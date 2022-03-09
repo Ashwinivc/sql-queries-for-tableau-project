@@ -10,7 +10,6 @@ order by 1,2
 
 select sum(new_cases) as total_cases ,sum(cast(new_deaths as int )) as totaldeaths,sum(cast(new_deaths as int ))/sum(new_cases)*100 as deathpercentage
 from [Portfolio Project]..['covid deaths#xls$']
---where location like '%states%'
 where continent is not null
 order by 1,2
 
@@ -18,7 +17,6 @@ order by 1,2
 
 select location,SUM(cast(new_deaths as int)) as totaldeathcount
 from [Portfolio Project]..['covid deaths#xls$']
-----where location like '%states%'
 where continent is null and
 location not in ('World', 'European Union', 'International')
 group by location 
@@ -28,7 +26,6 @@ order by totaldeathcount desc
 
 select location,population,MAX(total_cases) as highestinfectionrate,MAX((total_cases/population))*100 as percentpopulationinfected
 from [Portfolio Project]..['covid deaths#xls$']
---where location like '%states%'
 group by population, location
 order by percentpopulationinfected desc
 
@@ -37,7 +34,6 @@ order by percentpopulationinfected desc
 
 select location,population, date,MAX(total_cases) as highestinfectionrate,MAX((total_cases/population))*100 as percentpopulationinfected
 from [Portfolio Project]..['covid deaths#xls$']
---where location like '%states%'
 group by population, location, date
 order by percentpopulationinfected desc
 
